@@ -37,7 +37,7 @@ export function SignIn() {
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const toas = useToast()
+    const toast = useToast()
     const { signIn } = useAuth()
     const navigator = useNavigation<AuthNavigatorRoutesProps>()
     const {control, handleSubmit, formState: { errors }} = useForm<FormData>({
@@ -49,25 +49,23 @@ export function SignIn() {
     }
 
     async function handleSignIn({ email, password }: FormData) {
+        console.log({ email, password })
         try {
-            setIsLoading(true);
+            //setIsLoading(true);
             await signIn(email, password);
 
         } catch (error) {
             const isAppError = error instanceof AppError;
 
             const title =  isAppError ? error.message : 'Não foi possível entrar. Tente novamente mais tarde.'
-            console
-                .log(error)
-            console
-                .log(title)
 
-            toas.show({
+            console.log(title)
+            toast.show({
                 title,
                 placement: 'top',
                 bgColor: 'red.500'
             })
-            setIsLoading(false);
+           // setIsLoading(false);
         }
     }
 

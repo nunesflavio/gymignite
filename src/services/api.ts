@@ -13,7 +13,7 @@ import {AppError} from "@utils/AppError";
 
 api.interceptors.response.use(response => response, error => {
     if(error.response && error.response.data) {
-        return Promise.reject(new AppError(error.response.message))
+        return Promise.reject(new AppError(error.response.data.message))
 
     } else {
         return Promise.reject(error)
